@@ -10,39 +10,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class SPJServlet
- */
+
 @WebServlet("/SPJServlet")
 public class SPJServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
     public SPJServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
     @EJB
     Emp emp;
-    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String fname = request.getParameter("firstName");
-		String lname = request.getParameter("lastName");
 		PrintWriter out = response.getWriter();
-		
-		emp.setFname(fname);
-		emp.setLname(lname);
+		emp.setId(Integer.parseInt(request.getParameter("id")));
+		emp.setFname(request.getParameter("firstName"));
+		emp.setLname(request.getParameter("lastName"));
+		emp.setDesignation(request.getParameter("designation"));
+
 		EmpDAO dao = new EmpDAO();
 		dao.add(emp);
-		String x = emp.add();
-		out.print("Hello  "+x);
+		out.print("Hello  "+emp.getDesignation());
 		
 	}
 

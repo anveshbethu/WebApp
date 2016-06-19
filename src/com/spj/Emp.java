@@ -9,9 +9,22 @@ import javax.ejb.Stateless;
 @Stateless
 @LocalBean
 public class Emp {
-
-    private String fname, lname;
-    public String getFname() {
+	private int id;
+    private String fname, lname, designation;
+    
+    public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+	public String getFname() {
 		return fname;
 	}
 	public void setFname(String fname) {

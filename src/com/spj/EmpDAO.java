@@ -15,23 +15,21 @@ public class EmpDAO implements EmpRemote, Serializable{
 
 	public void add(Emp e){
 		Connection con = null;
-		String url = "jdbc.postgresql://localhost:5432/mydb";
-		String driver = "org.postgresql.Driver";
-		String username = "bethu";
-		String password = "mech";
+		
 		System.out.println("came till DAO");
 		try {
 
 			Class.forName("org.postgresql.Driver");
 	         con = DriverManager
-	            .getConnection("jdbc:postgresql://localhost:5432/mydb",
+	            .getConnection("jdbc:postgresql://spjdb.cee7p279hqea.us-west-2.rds.amazonaws.com:5432/mydb",
 	            "bethu", "mech");
 	         System.out.println("created connection");
 	         PreparedStatement st = 
-	         con.prepareStatement("insert into employee(fname, lname) values(?,?)");
-	         st.setString(1, e.getLname());
+	         con.prepareStatement("insert into employees(id, firstname, lastname, designation) values(?,?,?,?)");
+	         st.setInt(1, e.getId());
 	         st.setString(2, e.getFname());
-
+	         st.setString(3, e.getLname());
+	         st.setString(4, e.getDesignation());
 	         int result = st.executeUpdate();                
 
 	      } catch (SQLException ex) {
